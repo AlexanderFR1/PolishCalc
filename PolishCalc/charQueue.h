@@ -8,8 +8,36 @@ public:
 	{
 		array = new char[Sz];
 		size=Sz;
-		firstEl=0;
-		lastEl=1;
+		firstEl=1;
+		lastEl=0;
+	}
+	charQueue(const charQueue & objectT)//конструктор копирования
+	{
+		array = new char[objectT.size];
+		for (int i = 0; i < objectT.size; i++)
+		{
+			array[i] = objectT.array[i];
+		}
+		//array = objectT.array;
+		size = objectT.size;
+		firstEl = objectT.firstEl;
+		lastEl = objectT.lastEl;
+	}
+	charQueue& operator=(const charQueue& objectT)
+	{
+		if (this == &objectT)
+			return *this;
+		delete[]array;
+		//array = objectT.array;
+		array = new char[objectT.size];
+		for (int i = 0; i < objectT.size; i++)
+		{
+			array[i] = objectT.array[i];
+		}
+		size = objectT.size;
+		firstEl = objectT.firstEl;
+		lastEl = objectT.lastEl;
+		return *this;
 	}
 	~charQueue()
 
@@ -19,7 +47,7 @@ public:
 
 	bool isEmpty()
 	{
-		return (firstEl+1)%size==lastEl;
+		return (lastEl+1)%size==firstEl;
 	}
 	bool isFull()
 	{

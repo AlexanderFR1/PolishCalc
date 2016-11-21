@@ -18,7 +18,7 @@ public:
 
 	bool isEmpty()
 	{
-		return currentIndex<=-1;
+		return currentIndex<0;
 	}
 	bool isFull()
 	{

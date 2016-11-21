@@ -40,8 +40,8 @@ charQueue makePolish (char str[])//сделать из строки очередь с польской записью
 	len=strlen(str);
 	
 
-	charQueue polish (len);
-	charStack opers (len);
+	charQueue polish (len+2);
+	charStack opers (len+2);
 	char tempOper;
 
 	for (int i=0;i<len;i++)
@@ -87,10 +87,11 @@ charQueue makePolish (char str[])//сделать из строки очередь с польской записью
 				}
 			}
 		}
-		while( opers.isEmpty() )//пока стек операторов не пуст
-			{
-				polish.push (opers.pop() );//выталкивать всё оставшееся в очередь polish
-			}
+		
+	}
+	while (!opers.isEmpty())//пока стек операторов не пуст
+	{
+		polish.push(opers.pop());//выталкивать всё оставшееся в очередь polish
 	}
 	return polish;
 }
