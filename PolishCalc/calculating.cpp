@@ -17,7 +17,7 @@ float calculate(charQueue Polish)
 		if ( (temp>='0')&&(temp<='9') )//если из очереди выталкивается цифра
 		{
 			intTemp=static_cast<int>(temp);		
-			tempRes.push(static_cast<float>(intTemp));//то кладём её в стек промежуточного результата
+			tempRes.push(static_cast<float>(intTemp)-'0');//то кладём её в стек промежуточного результата
 		}
 		else//то есть если встретили + - / *
 		{
@@ -52,6 +52,6 @@ float calculate(charQueue Polish)
 			}
 		}
 	}
-	while (Polish.isEmpty()==false);
+	while (!Polish.isEmpty());
 	return (tempRes.pop() );
 }

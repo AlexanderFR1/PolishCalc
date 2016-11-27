@@ -6,20 +6,26 @@ using namespace std;
 
 int main()
 {
-	int i=0;
+	//int i=0;
 	float rez;
 	char primer[10];
+	charQueue polishQue(10);
+
 	cin>>primer;	
-	//выражение введено
-	charQueue polishQue(i);//создаётся пустая очередь для польской записи
-	/*primerFIN=new char [i];
-	for (int j=0;j<i;j++)
+	
+	//создаётся пустая очередь для польской записи
+	if (isStringCorrect(primer) )
 	{
-		primerFIN[j]=primer[j];
-	}*/
-	polishQue=makePolish(primer);
-	rez=calculate(polishQue);
-	cout<<rez;
+		polishQue=makePolish(primer);
+		show (polishQue);
+		cout<<'\n';
+		rez=calculate(polishQue);
+		cout<<rez;
+	}
+	else
+	{
+		cout<<"no";
+	}
 	//cin>>i;
 	return 0;
 }

@@ -10,6 +10,10 @@ public:
 		array=new  char [Sz];
 		currentIndex=-1;//-1 => стек не имеет ничего
 	}
+	charStack(const char & obj)
+	{
+
+	}
 	~charStack()
 	{
 		delete []array;
@@ -18,7 +22,7 @@ public:
 
 	bool isEmpty()
 	{
-		return currentIndex<=-1;
+		return currentIndex<0;
 	}
 	bool isFull()
 	{
