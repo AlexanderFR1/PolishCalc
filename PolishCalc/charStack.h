@@ -1,13 +1,17 @@
+#include <string>
+
+using namespace std;
+
 class charStack
 {
 	int size;
 	int currentIndex;
-	 char *array;
+	 string *array;
 public:
 	charStack(int Sz)
 	{
 		size=Sz;
-		array=new  char [Sz];
+		array=new  string [Sz];
 		currentIndex=-1;//-1 => стек не имеет ничего
 	}
 	charStack(const char & obj)
@@ -29,7 +33,7 @@ public:
 		return currentIndex==size-1;
 	}
 
-	void push ( char Elem)
+	void push ( string Elem)
 	{
 		if (isFull() )
 		{
@@ -43,7 +47,7 @@ public:
 		currentIndex--;
 	}
 
-	 char pop()
+	 string pop()
 	{
 		if (isEmpty() )
 		{

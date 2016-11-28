@@ -1,19 +1,24 @@
+
+#include <stdio.h>
+#include <iostream>
+
+using namespace std;
 class charQueue
 {
 	int size;
-	char *array;
+	string *array;
 	int firstEl, lastEl;
 public:
 	charQueue (int Sz)//  конструктор
 	{
-		array = new char[Sz];
+		array = new string[Sz];
 		size=Sz;
 		firstEl=1;
 		lastEl=0;
 	}
 	charQueue(const charQueue & objectT)//конструктор копирования
 	{
-		array = new char[objectT.size];
+		array = new string[objectT.size];
 		for (int i = 0; i < objectT.size; i++)
 		{
 			array[i] = objectT.array[i];
@@ -29,7 +34,7 @@ public:
 			return *this;
 		delete[]array;
 		//array = objectT.array;
-		array = new char[objectT.size];
+		array = new string[objectT.size];
 		for (int i = 0; i < objectT.size; i++)
 		{
 			array[i] = objectT.array[i];
@@ -54,7 +59,7 @@ public:
 		return (lastEl+2)%size==firstEl;
 	}
 
-	void push (char Elem)
+	void push (string Elem)
 	{
 		if (isFull() )
 		{
@@ -63,13 +68,13 @@ public:
 		lastEl=(lastEl+1)%size;
 		array[lastEl]=Elem;
 	}
-	char pop()
+	string pop()
 	{
 		if (isEmpty() )
 		{
 			throw "queue is empty";
 		}
-		char temp;
+		string temp;
 		temp=array[firstEl];
 		firstEl=(firstEl+1)%size;
 		return temp;

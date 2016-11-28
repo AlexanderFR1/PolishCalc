@@ -18,13 +18,13 @@
     <ClCompile Include="isStringCorrect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="convertToPolish.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="calculating.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="convertToPolish.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,10 +35,10 @@
     <ClInclude Include="charStack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="charQueue.h">
+    <ClInclude Include="floatResult.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="floatResult.h">
+    <ClInclude Include="charQueue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
