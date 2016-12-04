@@ -1,15 +1,15 @@
 #include "headerForMethods.h"
-#include<string.h>
-bool isStringCorrect( char str [])
+#include <string.h>
+bool isStringCorrect( string str)
 {
 	int len;
-	len=strlen(str);
+	len=str.length();
 	int bracketsCount;
 	bracketsCount=0;
 	for (int i=0;i<len;i++)
 	{
 		//недопустиые символы
-		if ( ( (str[i]<'0')||(str[i]>'9') )&&( (str[i]!='+')&&(str[i]!='-')&&(str[i]!='*')&&(str[i]!='/') )&& (str[i]!='(')&&(str[i]!=')') )
+		if ( ( (str[i]<'0')||(str[i]>'9') )&&( (str[i]!='+')&&(str[i]!='-')&&(str[i]!='*')&&(str[i]!='/')&&(str[i]!='(')&&(str[i]!=')')&&(str[i]!=' ') ) )
 		{
 			//throw "string is incorrect";
 			return false;
@@ -20,6 +20,11 @@ bool isStringCorrect( char str [])
 			//throw "string is incorrect";
 			return false;
 		}
+		//пробел
+		/*if (str[i] == ' ')
+		{
+
+		}*/
 		//подсчёт числа скобок
 		if ( str[i]=='(' )
 		{

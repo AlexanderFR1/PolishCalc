@@ -1,25 +1,32 @@
 #include "headerForMethods.h"
 #include <iostream>
-#include <string.h>
+#include <string>
 
 using namespace std;
 
 int main()
 {
-	int i=0;
+	//int i=0;
 	float rez;
-	char primer[10];
-	cin>>primer;	
-	//выражение введено
-	charQueue polishQue(i);//создаётся пустая очередь для польской записи
-	/*primerFIN=new char [i];
-	for (int j=0;j<i;j++)
+	std::string primer;
+	charQueue polishQue(10);
+
+	std::getline(std::cin, primer); //cin>>primer;	
+	
+	
+	//создаётся пустая очередь для польской записи
+	if (isStringCorrect(primer) )
 	{
-		primerFIN[j]=primer[j];
-	}*/
-	polishQue=makePolish(primer);
-	rez=calculate(polishQue);
-	cout<<rez;
+		polishQue=makePolish(primer);
+		show (polishQue);
+		cout<<'\n';
+		rez=calculate(polishQue);
+		cout<<rez;
+	}
+	else
+	{
+		cout<<"no";
+	}
 	//cin>>i;
 	return 0;
 }

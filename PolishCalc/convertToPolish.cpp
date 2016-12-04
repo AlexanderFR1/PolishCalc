@@ -5,9 +5,13 @@
 #include "charStack.h"*/
 #include "headerForMethods.h"
 
+using namespace std;
+
 int getPriority (char oper)//таблица приоритетов
 {
 	int prior;
+//	char operT;
+	//operT = oper[0];
 	switch (oper)
 	{
 		case '+': 
@@ -22,75 +26,145 @@ int getPriority (char oper)//таблица приоритетов
 			prior=2;
 			break;
 		}
-		case '(': 
-		case ')': 
-		{
-			prior=0;
-			break;
-		}
 	}
 	return prior;
 }
 
-charQueue makePolish (char str[])//сделать из строки очередь с польской записью
+charQueue makePolish (string str)//сделать из строки очередь с польской записью
 {
 	int len, maxPriority, currentPriority;
 	maxPriority=0;
 	currentPriority=0;
-	len=strlen(str);
+	len=str.length();
+
+
+	int sizeOfNumber;//размерность числа, бќльшего дев€ти
+	int incCount;
+	
 	
 
-	charQueue polish (len);
-	charStack opers (len);
-	char tempOper;
-
+	charQueue polish (len+2);
+	charStack opers (len+2);
+	std::string tempOper;
+	tempOper="";
 	for (int i=0;i<len;i++)
-	{
-		if ( (str[i]>='0')&&(str[i]<='9') )//если встретили цифру, то сразу кладЄм в очередь
-		{
-			polish.push(str[i]);
-		}
-		else//а если оператор
-		{
+	{		
 			if (str[i]=='(')
 			{
-				opers.push(str[i]);
+				std::string s;
+				s="(";
+				opers.push(s);
+
 			}
-			if (str[i]==')')
+			//========здесь собака зарыта=========================================================
+		if (str[i]==')')
+			{				
+					while (tempOper[0]!='(')//выталкивать всЄ, что до входной скобки, в очередь polish
+					{	
+						tempOper=opers.pop();
+						if (tempOper[0]!='(')
+						{
+							polish.push(tempOper);
+						}
+					}
+					maxPriority=0;
+			}
+//========================================
+		if ( (str[i]>='0')&&(str[i]<='9') )//если встретили цифру, то
+		{
+			if ( ( (str[i+1]<'0')||(str[i+1]>'9') ) )//если встретили число от 0 до 9  (следующий символ - не цифра)
+			{
+				string temp;
+				temp=str[i];
+				polish.push(temp);
+			}
+			else//то есть если число больше 9  ================================================
 			{
 				{
-					do//выталкивать всЄ, что до входной скобки, в очередь polish
+					incCount=0;
+					std::string tempNumber;
+					sizeOfNumber=0;
+					for (int j=i;( (str[j]>='0')&&(str[j]<='9') );j++ )
 					{
-					
-						tempOper=opers.pop();
-						polish.push(tempOper);
+						sizeOfNumber++;
+					}			
+					for (int g=0;g<sizeOfNumber;g++)//заполн€ем временный массив числом больше 9
+					{
+						tempNumber+=str[i+g];
+						incCount++;
 					}
-					while (tempOper!='(');
-					opers.delTopEl();//удалить входную скобку
+					polish.push(tempNumber);//по идее, здесь в очередь должен зталкиватьс€ массив строк в виде string
+					i=i+incCount-1;
 				}
-			}
-			else
+		   }
+		}
+
+		///////////////////== дальше - возн€ с операторами ==/////////////////////////////////////
+		if ( (str[i]=='+')||(str[i]=='-')||(str[i]=='/')||(str[i]=='*') )
 			{
-				//а если + - / * то
 				currentPriority=getPriority(str[i]);
-				if (currentPriority>maxPriority)
-				{				
-					opers.push(str[i]);
+				if (currentPriority>=maxPriority)
+				{
+					string s;
+					s = str[i];
+					opers.push(s);
+					//tempOper=str[i];
 					maxPriority=currentPriority;
 				}
-				else//т.е currentPriority<=maxPriority
+				else//т.е currentPriority<maxPriority
 				{
-					tempOper=opers.pop();
-					polish.push(tempOper);
-					opers.push(str[i]);
+					string temp;					
+					temp=opers.pop();
+					polish.push(temp);
+					temp=str[i];
+					opers.push(temp);
 					maxPriority=getPriority(str[i]);
 				}
 			}
-		}
-		while( opers.isEmpty() )//пока стек операторов не пуст
-			{
-				polish.push (opers.pop() );//выталкивать всЄ оставшеес€ в очередь polish
-			}
+
 	}
-	return polish;
+	while ( !opers.isEmpty() )//пока стек операторов не пуст
+	{
+		string tempLast;
+		tempLast=opers.pop();
+		if (tempLast[0]!='(')
+		{
+			polish.push(tempLast);//выталкивать всЄ оставшеес€ в очередь polish
+		}
+	}
+		return polish;
+}
+
+void show(charQueue Polish)
+{
+	string temp;
+	do
+	{
+		temp=Polish.pop();
+		cout<<temp<<' ';
+	}
+	while (!Polish.isEmpty() );
+}
+//======================================================================================================================================================
+//======================================================================================================================================================
+//==================================================
+//=========Ќ≈–јЅќ„≈≈=============================
+//================================================
+char makeNumberChar(char strT[], int startIndex )
+{
+	char *temp;
+	int size; 	//в size лежит размерность числа
+	size=0;
+	for (int i=startIndex;( (strT[i]!='+')||(strT[i]!='-')||(strT[i]!='/')||(strT[i]!='*')||( strT[i]!='\0') );i++)
+	{
+		size++;
+	}
+	//size++;
+	temp = new char [size+1];
+	for (int i=startIndex;i<startIndex+size;i++)
+	{
+		temp[i-startIndex]=strT[i];//записываем в массив число
+	}
+	temp [size-1]='D';
+	return *temp;
 }
