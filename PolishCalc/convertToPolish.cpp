@@ -56,7 +56,7 @@ charQueue makePolish (string str)//сделать из строки очередь с польской записью
 				opers.push(s);
 
 			}
-			//========здесь собака зарыта=========================================================
+			//========здесь собака БЫЛА зарыта=========================================================
 		if (str[i]==')')
 			{				
 					while (tempOper[0]!='(')//выталкивать всё, что до входной скобки, в очередь polish
@@ -103,25 +103,43 @@ charQueue makePolish (string str)//сделать из строки очередь с польской записью
 		if ( (str[i]=='+')||(str[i]=='-')||(str[i]=='/')||(str[i]=='*') )
 			{
 				currentPriority=getPriority(str[i]);
-				if (currentPriority>=maxPriority)
+				if (currentPriority>maxPriority)
 				{
 					string s;
 					s = str[i];
 					opers.push(s);
-					//tempOper=str[i];
 					maxPriority=currentPriority;
 				}
-				else//т.е currentPriority<maxPriority
+				/*if (currentPriority == maxPriority)
 				{
-					string temp;					
-					temp=opers.pop();
+					string temp,s;
+					temp = opers.pop();
+					s = str[i];
+					opers.push(s);
 					polish.push(temp);
+				}*/
+				else
+				if( currentPriority<maxPriority)
+				{
+					string temp;
+					while (!opers.isEmpty())
+					{
+						temp = opers.pop();
+						polish.push(temp);
+					}
 					temp=str[i];
 					opers.push(temp);
 					maxPriority=getPriority(str[i]);
 				}
+				else
+				{
+					string temp, s;
+					temp = opers.pop();
+					s = str[i];
+					opers.push(s);
+					polish.push(temp);
+				}
 			}
-
 	}
 	while ( !opers.isEmpty() )//пока стек операторов не пуст
 	{
