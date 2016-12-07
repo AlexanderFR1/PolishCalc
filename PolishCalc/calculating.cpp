@@ -1,6 +1,3 @@
-/*#include "charQueue.h"
-#include "charStack.h"
-#include "floatResult.h"*/
 #include <string>
 #include "headerForMethods.h"
 #include <cstdlib>
