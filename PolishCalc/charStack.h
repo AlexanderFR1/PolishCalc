@@ -12,6 +12,10 @@ class charStack
 public:
 	charStack(int Sz)
 	{
+		if (Sz<0)
+		{
+			throw "error";
+		}
 		size=Sz;
 		array=new string [Sz];
 		currentIndex=-1;//-1 => стек не имеет ничего

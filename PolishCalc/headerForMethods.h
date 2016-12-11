@@ -5,9 +5,11 @@
 #include <string.h>
 
 bool isStringCorrect( string str );
-charQueue makePolish (string str);
+//extern "C" 
+	charQueue makePolish (string str);
 int getPriority (char oper);
-float calculate(charQueue Polish);
+//extern "C" 
+	float calculate(charQueue Polish);
 void show(charQueue Polish);
 //char makeNumberChar(char strT[], int startIndex);
 //bool isLittleNumber (char strT[], int startIndex);

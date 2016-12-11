@@ -11,13 +11,18 @@ bool isStringCorrect( string str)
 		//недопустиые символы
 		if ( ( (str[i]<'0')||(str[i]>'9') )&&( (str[i]!='+')&&(str[i]!='-')&&(str[i]!='*')&&(str[i]!='/')&&(str[i]!='(')&&(str[i]!=')')&&(str[i]!=' ') ) )
 		{
-			//throw "string is incorrect";
+			throw "string is incorrect";
 			return false;
 		}
 		//два оператора подряд
 		if ( ( (str[i]=='+')||(str[i]=='-')||(str[i]=='*')||(str[i]=='/') ) && ( (str[i+1]=='+')||(str[i+1]=='-')||(str[i+1]=='*')||(str[i+1]=='/') ) )
 		{
-			//throw "string is incorrect";
+			throw "string is incorrect";
+			return false;
+		}
+		if (( (str[i]=='+')||(str[i]=='-')||(str[i]=='*')||(str[i]=='/') ) &&  (str[i+1]=='\0') )
+		{
+			throw "string is incorrect";
 			return false;
 		}
 		//пробел
@@ -38,6 +43,7 @@ bool isStringCorrect( string str)
 	//если соотношение скобок не равно
 	if ( bracketsCount!=0 )
 	{
+		throw "string is incorrect";
 		return false;
 	}
 

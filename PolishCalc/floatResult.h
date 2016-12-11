@@ -6,6 +6,10 @@ class floatResult
 public:
 	floatResult(int Sz)
 	{
+		if (Sz<0)
+		{
+			throw "error";
+		}
 		size=Sz;
 		array=new float [Sz];
 		currentIndex=-1;//-1 => стек не имеет ничего

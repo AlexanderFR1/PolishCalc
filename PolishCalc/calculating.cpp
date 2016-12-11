@@ -52,6 +52,10 @@ float calculate(charQueue Polish)
 				}
 				case '/':
 				{
+					if (Num2==0)
+					{
+						throw "divide at zero";
+					}
 					num=Num1/Num2;
 					tempRes.push (num);
 					break;

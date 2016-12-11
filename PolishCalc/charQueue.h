@@ -10,6 +10,10 @@ class charQueue
 public:
 	charQueue (int Sz)//  конструктор
 	{
+		if (Sz<0)
+		{
+			throw "error";
+		}
 		array = new string[Sz];
 		size=Sz;
 		firstEl=1;
@@ -22,7 +26,6 @@ public:
 		{
 			array[i] = objectT.array[i];
 		}
-		//array = objectT.array;
 		size = objectT.size;
 		firstEl = objectT.firstEl;
 		lastEl = objectT.lastEl;
